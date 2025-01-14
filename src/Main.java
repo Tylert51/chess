@@ -16,10 +16,5 @@ public class Main {
 
         window.setLocationRelativeTo(null);
         window.setVisible(true);
-
-        PieceColor white = new PieceColor("white");
-        PieceColor black = new PieceColor("black");
-
-        Board board = new Board(white, black, gamePanel);
     }
 }

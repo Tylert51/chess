@@ -24,7 +24,35 @@ public class Board {
         initializeBoard();
     }
 
+    /* Testing Puposes */
+    public Board(PieceColor white, PieceColor black) {
+        pieceBoard = new Piece[8][8];
+        tiles = new Tile[2];
+        board = new Tile[8][8];
+
+        tiles[0] = new Tile("tiles\\white.png");
+        tiles[1] = new Tile("tiles\\gray.png");
+
+        this.white = white;
+        this.black = black;
+
+        initializeBoard();
+    }
+
+    public void printBoard() {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                System.out.print(pieceBoard[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    /* Testing Puposes (end) */
+
     public void draw(Graphics2D g2) {
+
+        // draw the board
 
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
@@ -33,15 +61,17 @@ public class Board {
             }
         }
 
-    }
+        // draw the pieces
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
 
-    public void printBoard() {
-        for (int i = 0; i < pieceBoard.length; i++) {
-            for (int j = 0; j < pieceBoard[0].length; j++) {
-                System.out.print(board[i][j]);
-                System.out.print(" ");
+                Piece piece = pieceBoard[i][j];
+
+                if (piece != null) {
+                    g2.drawImage(piece.getImage(), j * gamePanel.getTileSize(), i * gamePanel.getTileSize(),
+                            gamePanel.getTileSize(), gamePanel.getTileSize(), null);
+                }
             }
-            System.out.println();
         }
     }
 
@@ -73,7 +103,7 @@ public class Board {
         int row = 6;
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 8; j++) {
-                color.addPiece(new Piece("pawn", 1, color, this, row, j));
+                color.addPiece(new Piece("pawn", 1, color, this, row, j, "pieces\\" + color + "\\pawn.png"));
             }
             color = black;
             row = 1;
@@ -85,7 +115,7 @@ public class Board {
         int row = 7;
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 8; j += 7) {
-                color.addPiece(new Piece("rook", 5, color, this, row, j));
+                color.addPiece(new Piece("rook", 5, color, this, row, j, "pieces\\" + color + "\\rook.png"));
             }
             color = black;
             row = 0;
@@ -97,7 +127,7 @@ public class Board {
         int row = 7;
         for (int i = 0; i < 2; i++) {
             for (int j = 1; j < 8; j += 5) {
-                color.addPiece(new Piece("knight", 3, color, this, row, j));
+                color.addPiece(new Piece("knight", 3, color, this, row, j, "pieces\\" + color + "\\knight.png"));
             }
             color = black;
             row = 0;
@@ -109,7 +139,7 @@ public class Board {
         int row = 7;
         for (int i = 0; i < 2; i++) {
             for (int j = 2; j < 8; j += 3) {
-                color.addPiece(new Piece("bishop", 3, color, this, row, j));
+                color.addPiece(new Piece("bishop", 3, color, this, row, j, "pieces\\" + color + "\\bishop.png"));
             }
             color = black;
             row = 0;
@@ -121,7 +151,7 @@ public class Board {
         int row = 7;
         for (int i = 0; i < 2; i++) {
 
-            color.addPiece(new Piece("queen", 9, color, this, row, 3));
+            color.addPiece(new Piece("queen", 9, color, this, row, 3, "pieces\\" + color + "\\queen.png"));
 
             color = black;
             row = 0;
@@ -133,7 +163,7 @@ public class Board {
         int row = 7;
         for (int i = 0; i < 2; i++) {
 
-            color.addPiece(new Piece("king", 0, color, this, row, 4));
+            color.addPiece(new Piece("king", 0, color, this, row, 4, "pieces\\" + color + "\\king.png"));
 
             color = black;
             row = 0;

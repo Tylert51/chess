@@ -1,0 +1,15 @@
+{
+  "java.project.sourcePaths": ["src"],
+  "java.project.outputPath": "bin",
+  "java.project.referencedLibraries": [
+    "d:\\Desktop\\Bing\\coding\\javafx-sdk-21.0.5\\lib\\javafx.controls.jar",
+    "d:\\Desktop\\Bing\\coding\\javafx-sdk-21.0.5\\lib\\javafx.web.jar",
+    "d:\\Desktop\\Bing\\coding\\javafx-sdk-21.0.5\\lib\\javafx-swt.jar",
+    "d:\\Desktop\\Bing\\coding\\javafx-sdk-21.0.5\\lib\\javafx.base.jar",
+    "d:\\Desktop\\Bing\\coding\\javafx-sdk-21.0.5\\lib\\javafx.media.jar",
+    "d:\\Desktop\\Bing\\coding\\javafx-sdk-21.0.5\\lib\\javafx.graphics.jar",
+    "d:\\Desktop\\Bing\\coding\\javafx-sdk-21.0.5\\lib\\javafx.swing.jar",
+    "d:\\Desktop\\Bing\\coding\\javafx-sdk-21.0.5\\lib\\javafx.fxml.jar"
+  ],
+  "java.format.settings.url": ".vscode/java-formatter.xml"
+}

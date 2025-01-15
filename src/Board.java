@@ -84,7 +84,7 @@ public class Board {
         initializeKing();
 
         // convert string board to tile board
-        String boardStr[][] = BoardReader.getIndexes("src\\board.txt");
+        String boardStr[][] = BoardReader.getIndexes("src\\files\\board.txt");
 
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {

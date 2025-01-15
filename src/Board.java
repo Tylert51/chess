@@ -15,8 +15,8 @@ public class Board {
         this.gamePanel = gamePanel;
         board = new Tile[8][8];
 
-        tiles[0] = new Tile("tiles\\white.png");
-        tiles[1] = new Tile("tiles\\gray.png");
+        tiles[0] = new Tile("img\\tiles\\white.png");
+        tiles[1] = new Tile("img\\tiles\\gray.png");
 
         this.white = white;
         this.black = black;
@@ -30,8 +30,8 @@ public class Board {
         tiles = new Tile[2];
         board = new Tile[8][8];
 
-        tiles[0] = new Tile("tiles\\white.png");
-        tiles[1] = new Tile("tiles\\gray.png");
+        tiles[0] = new Tile("img\\tiles\\white.png");
+        tiles[1] = new Tile("img\\tiles\\gray.png");
 
         this.white = white;
         this.black = black;
@@ -103,7 +103,7 @@ public class Board {
         int row = 6;
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 8; j++) {
-                color.addPiece(new Piece("pawn", 1, color, this, row, j, "pieces\\" + color + "\\pawn.png"));
+                color.addPiece(new Pawn(color, this, row, j));
             }
             color = black;
             row = 1;
@@ -115,7 +115,7 @@ public class Board {
         int row = 7;
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 8; j += 7) {
-                color.addPiece(new Piece("rook", 5, color, this, row, j, "pieces\\" + color + "\\rook.png"));
+                color.addPiece(new Rook(color, this, row, j));
             }
             color = black;
             row = 0;
@@ -127,7 +127,7 @@ public class Board {
         int row = 7;
         for (int i = 0; i < 2; i++) {
             for (int j = 1; j < 8; j += 5) {
-                color.addPiece(new Piece("knight", 3, color, this, row, j, "pieces\\" + color + "\\knight.png"));
+                color.addPiece(new Knight(color, this, row, j));
             }
             color = black;
             row = 0;
@@ -139,7 +139,7 @@ public class Board {
         int row = 7;
         for (int i = 0; i < 2; i++) {
             for (int j = 2; j < 8; j += 3) {
-                color.addPiece(new Piece("bishop", 3, color, this, row, j, "pieces\\" + color + "\\bishop.png"));
+                color.addPiece(new Bishop(color, this, row, j));
             }
             color = black;
             row = 0;
@@ -151,7 +151,7 @@ public class Board {
         int row = 7;
         for (int i = 0; i < 2; i++) {
 
-            color.addPiece(new Piece("queen", 9, color, this, row, 3, "pieces\\" + color + "\\queen.png"));
+            color.addPiece(new Queen(color, this, row, 3));
 
             color = black;
             row = 0;
@@ -163,7 +163,7 @@ public class Board {
         int row = 7;
         for (int i = 0; i < 2; i++) {
 
-            color.addPiece(new Piece("king", 0, color, this, row, 4, "pieces\\" + color + "\\king.png"));
+            color.addPiece(new King(color, this, row, 4));
 
             color = black;
             row = 0;

@@ -23,6 +23,16 @@ public class GamePanel extends JPanel {
         PieceColor black = new PieceColor("black");
         board = new Board(white, black, this);
 
+        Piece[][] pieceBoard = board.getPieceBoard();
+        for (int i = 0; i < pieceBoard.length; i++) {
+            for (int j = 0; j < pieceBoard[0].length; j++) {
+                Piece piece = pieceBoard[i][j];
+                if (piece != null) {
+                    this.add(piece);
+                }
+            }
+        }
+
     }
 
     public int getTileSize() {

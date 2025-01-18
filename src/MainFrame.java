@@ -14,6 +14,16 @@ public class MainFrame {
         window.add(gamePanel);
         window.pack();
 
+        Piece[][] pieceBoard = gamePanel.getBoard().getPieceBoard();
+        for (int i = 0; i < pieceBoard.length; i++) {
+            for (int j = 0; j < pieceBoard[0].length; j++) {
+                Piece piece = pieceBoard[i][j];
+                if (piece != null) {
+                    window.add(piece);
+                }
+            }
+        }
+
         window.setLocationRelativeTo(null);
         window.setVisible(true);
     }

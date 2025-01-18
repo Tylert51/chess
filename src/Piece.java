@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.*;
@@ -12,24 +13,29 @@ public class Piece extends JPanel {
     private String name;
     private int value;
     private PieceColor color;
-    private int[] coords;
+    private int[] index;
     private Board board;
 
-    protected BufferedImage image;
-    protected final int imgWidth;
-    protected Point imageCorner;
-    protected Point previousPoint;
+    private BufferedImage image;
+    private final int imgWidth;
+    private Point imageCorner;
+    private Point previousPoint;
+    private Point initialClick;
 
     private String fileName;
     private ArrayList<int[]> possibleMoves;
 
-    public Piece(String name, int value, PieceColor color, Board board, int x, int y, String fileName) {
+    private Graphics2D g;
+
+    public Piece(String name, int value, PieceColor color, Board board, int row, int col, String fileName) {
         this.name = name;
         this.value = value;
         this.color = color;
         this.board = board;
-        coords = new int[] { x, y };
-        board.setPiece(this, x, y);
+
+        index = new int[] { row, col };
+
+        board.setPiece(this, row, col);
 
         this.fileName = name;
         try {
@@ -40,7 +46,7 @@ public class Piece extends JPanel {
 
         // dragging and dropping img
         imgWidth = image.getWidth();
-        imageCorner = new Point(0, 0);
+        imageCorner = new Point(indexToCoords(index[0]), indexToCoords(index[1]));
 
         ClickListener clickListener = new ClickListener();
         this.addMouseListener(clickListener);
@@ -48,38 +54,65 @@ public class Piece extends JPanel {
         this.addMouseMotionListener(dragListener);
     }
 
-    public void paintComponent(Graphics2D g) {
-        super.paintComponent(g);
-        g.drawImage(image, (int) imageCorner.getX(), (int) imageCorner.getY(), null);
-    }
-
     private class ClickListener extends MouseAdapter {
 
+        @Override
         public void mousePressed(MouseEvent evt) {
             previousPoint = evt.getPoint();
+            initialClick = evt.getPoint();
         }
 
+        @Override
+        public void mouseReleased(MouseEvent evt) {
+            int indexCol = coordsToIndex((int) evt.getPoint().getX());
+            int indexRow = coordsToIndex((int) evt.getPoint().getY());
+            board.setPiece(Piece.this, indexRow, indexCol);
+            board.printBoard();
+        }
     }
 
     private class DragListener extends MouseMotionAdapter {
 
+        @Override
         public void mouseDragged(MouseEvent evt) {
 
-            Point currPoint = evt.getPoint();
-            imageCorner.translate((int) (currPoint.getX() - previousPoint.getX()),
-                    (int) (currPoint.getY() - previousPoint.getY()));
+            int indexCol = coordsToIndex((int) initialClick.getX());
+            int indexRow = coordsToIndex((int) initialClick.getY());
 
-            previousPoint = currPoint;
-            repaint();
+            if (indexCol == index[1] && indexRow == index[0]) {
+                board.setPiece(null, indexRow, indexCol);
+                Point currPoint = evt.getPoint();
+                imageCorner.translate((int) (currPoint.getX() - previousPoint.getX()),
+                        (int) (currPoint.getY() - previousPoint.getY()));
+
+                previousPoint = currPoint;
+                repaint();
+            }
         }
+    }
+
+    public int coordsToIndex(int coord) {
+        return coord / imgWidth;
+    }
+
+    public int indexToCoords(int ind) {
+        return ind * imgWidth;
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D) g;
+        board.draw(g2);
+        g2.drawImage(image, (int) imageCorner.getX(), (int) imageCorner.getY(), null);
     }
 
     public BufferedImage getImage() {
         return image;
     }
 
-    public int[] getCoords() {
-        return coords;
+    public int[] getIndex() {
+        return index;
     }
 
     public int getValue() {
@@ -92,9 +125,11 @@ public class Piece extends JPanel {
 
     public void movePiece(int x, int y) {
         board.setPiece(this, x, y);
-        board.setPiece(null, coords[0], coords[1]);
-        coords[0] = x;
-        coords[1] = y;
+        board.setPiece(null, index[0], index[1]);
+        index[0] = x;
+        index[1] = y;
+        System.out.println(index[0]);
+        System.out.println(index[1]);
     }
 
     @Override

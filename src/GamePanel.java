@@ -23,22 +23,17 @@ public class GamePanel extends JPanel {
         PieceColor black = new PieceColor("black");
         board = new Board(white, black, this);
 
-        Piece[][] pieceBoard = board.getPieceBoard();
-        for (int i = 0; i < pieceBoard.length; i++) {
-            for (int j = 0; j < pieceBoard[0].length; j++) {
-                Piece piece = pieceBoard[i][j];
-                if (piece != null) {
-                    this.add(piece);
-                }
-            }
-        }
+    }
 
+    public Board getBoard() {
+        return board;
     }
 
     public int getTileSize() {
         return tileSize;
     }
 
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;

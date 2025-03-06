@@ -15,8 +15,8 @@ public class Board {
         this.gamePanel = gamePanel;
         board = new Tile[8][8];
 
-        tiles[0] = new Tile("img\\tiles\\white.png");
-        tiles[1] = new Tile("img\\tiles\\gray.png");
+        tiles[0] = new Tile("img/tiles/white.png");
+        tiles[1] = new Tile("img/tiles/gray.png");
 
         this.white = white;
         this.black = black;
@@ -90,7 +90,7 @@ public class Board {
         initializeKing();
 
         // convert string board to tile board
-        String boardStr[][] = BoardReader.getIndexes("src\\files\\board.txt");
+        String boardStr[][] = BoardReader.getIndexes("src/files/board.txt");
 
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
